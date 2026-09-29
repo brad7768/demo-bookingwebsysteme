@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 640" role="img" aria-label="Abstract atelier form in warm light">
+  <defs>
+    <radialGradient id="glow" cx="32%" cy="22%" r="55%">
+      <stop offset="0%" stop-color="#efe4d6"/>
+      <stop offset="100%" stop-color="#1c1916" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="form" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d9cfc2"/>
+      <stop offset="45%" stop-color="#8d7b68"/>
+      <stop offset="100%" stop-color="#2c2824"/>
+    </linearGradient>
+  </defs>
+  <rect width="460" height="640" fill="#1c1916"/>
+  <rect width="460" height="640" fill="url(#glow)"/>
+  <ellipse cx="230" cy="300" rx="120" ry="200" fill="url(#form)" opacity="0.95"/>
+  <ellipse cx="200" cy="260" rx="40" ry="80" fill="#f4f0ea" opacity="0.12"/>
+</svg>

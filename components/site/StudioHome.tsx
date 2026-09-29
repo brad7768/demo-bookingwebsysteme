@@ -4,6 +4,7 @@ import { useState } from "react";
 import { BookingFlow } from "@/components/booking/BookingFlow";
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
+import { HeroVisual } from "@/components/site/HeroVisual";
 import { Button, buttonClass } from "@/components/ui/Button";
 import { services, studio } from "@/lib/data";
 import { cn, formatDuration, formatPrice } from "@/lib/utils";
@@ -58,14 +59,7 @@ export function StudioHome() {
             </div>
             <div className="relative animate-rise lg:justify-self-end" style={{ animationDelay: "80ms" }}>
               <div className="absolute -inset-4 rounded-[2.4rem] bg-sand/60" />
-              <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-line shadow-soft sm:aspect-[5/6] lg:h-[640px] lg:w-[460px]">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_28%_18%,#efe4d6,transparent_42%),radial-gradient(circle_at_78%_72%,#8d7b68,transparent_46%),linear-gradient(165deg,#1c1916_0%,#3a332c_46%,#c9bbaa_100%)]" />
-                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-ink/50 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-8 text-paper">
-                  <p className="text-[11px] uppercase tracking-[0.22em] text-paper/70">The atelier</p>
-                  <p className="mt-2 font-serif text-4xl leading-none">Light, kept quiet.</p>
-                </div>
-              </div>
+              <HeroVisual />
             </div>
           </section>
 
