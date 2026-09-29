@@ -1,6 +1,8 @@
 "use client";
 
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useState } from "react";
+import { Button } from "@/components/ui/Button";
 import { layoutDay } from "@/lib/schedule";
 import type { EnrichedAppointment } from "@/lib/types";
 import { addDays, cn, formatMonthDay, formatWeekdayShort, sameDay, startOfWeek, toISODate, toMinutes } from "@/lib/utils";
@@ -23,6 +25,7 @@ export function WeekCalendar({
   now: Date;
   appointments: EnrichedAppointment[];
 }) {
+  const reduce = useReducedMotion();
   const [offset, setOffset] = useState(0);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const weekStart = addDays(startOfWeek(now), offset * 7);
@@ -124,11 +127,11 @@ export function WeekCalendar({
                           type="button"
                           onClick={() => setSelectedId(block.id)}
                           className={cn(
-                            "absolute overflow-hidden rounded-xl px-2 py-1 text-left shadow-sm transition",
+                            "absolute overflow-hidden rounded-2xl px-2.5 py-2 text-left shadow-soft transition duration-300 hover:scale-[1.02] hover:shadow-elevated",
                             tones[block.professionalId] ?? tones.emma,
                             block.status === "pending" && "ring-1 ring-dashed ring-ink/40",
                             block.status === "completed" && "opacity-60",
-                            active && "ring-2 ring-ink",
+                            active && "ring-2 ring-ink scale-[1.02]",
                           )}
                           style={{
                             top: top + 2,
@@ -151,25 +154,63 @@ export function WeekCalendar({
         </div>
       </div>
 
-      {selected ? (
-        <article className="rounded-3xl border border-line bg-paper p-5 shadow-soft">
-          <div className="flex flex-wrap items-start justify-between gap-3">
-            <div>
-              <p className="text-[11px] uppercase tracking-[0.16em] text-muted">{selected.time} · {selected.professionalName}</p>
-              <h3 className="mt-1 font-serif text-3xl">{selected.customerName}</h3>
-              <p className="mt-1 text-sm text-ink-soft">
-                {selected.serviceName} · {selected.duration} min
-              </p>
-            </div>
-            <button type="button" onClick={() => setSelectedId(null)} className="text-sm text-muted hover:text-ink">
-              Close
-            </button>
-          </div>
-          <p className="mt-3 text-sm capitalize text-ink">{selected.status}</p>
-        </article>
-      ) : (
-        <p className="text-sm text-ink-soft">Select an appointment to read the details. Scroll sideways on a small screen.</p>
-      )}
+      <AnimatePresence>
+        {selected ? (
+          <>
+            <motion.button
+              type="button"
+              aria-label="Close appointment details"
+              className="fixed inset-0 z-40 bg-ink/25 backdrop-blur-sm"
+              initial={reduce ? false : { opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedId(null)}
+            />
+            <motion.aside
+              className="fixed inset-y-0 right-0 z-50 flex w-full max-w-md flex-col border-l border-line bg-paper/95 p-6 shadow-elevated backdrop-blur-xl"
+              initial={reduce ? false : { x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", stiffness: 320, damping: 32 }}
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <p className="text-[11px] uppercase tracking-[0.16em] text-muted">Appointment</p>
+                  <h3 className="mt-2 font-serif text-4xl">{selected.customerName}</h3>
+                </div>
+                <button type="button" onClick={() => setSelectedId(null)} className="text-sm text-muted hover:text-ink">
+                  Close
+                </button>
+              </div>
+              <dl className="mt-8 space-y-4 text-sm">
+                <DrawerRow label="Customer" value={selected.customerName} />
+                <DrawerRow label="Service" value={selected.serviceName} />
+                <DrawerRow label="Professional" value={selected.professionalName} />
+                <DrawerRow label="Date" value={selected.date} />
+                <DrawerRow label="Time" value={selected.time} />
+                <DrawerRow label="Status" value={selected.status} />
+                <DrawerRow label="Duration" value={`${selected.duration} min`} />
+              </dl>
+              <div className="mt-auto flex flex-col gap-2 pt-8">
+                <Button size="sm">Confirm</Button>
+                <Button size="sm" variant="secondary">Reschedule</Button>
+                <Button size="sm" variant="ghost">Cancel</Button>
+              </div>
+            </motion.aside>
+          </>
+        ) : (
+          <p className="text-sm text-ink-soft">Select an appointment to open details. Scroll sideways on a small screen.</p>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+function DrawerRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex justify-between gap-4 border-b border-line/70 pb-3">
+      <dt className="text-muted">{label}</dt>
+      <dd className="text-right capitalize text-ink">{value}</dd>
     </div>
   );
 }

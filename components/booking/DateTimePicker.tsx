@@ -44,8 +44,8 @@ export function DateTimePicker({
   const canPrev = visible > new Date(today.getFullYear(), today.getMonth(), 1);
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
-      <div>
+    <div className="grid gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
+      <div className="rounded-3xl border border-line/80 bg-ivory/50 p-4 md:p-5">
         <div className="mb-4 flex items-center justify-between">
           <h3 className="font-serif text-2xl">{formatMonthYear(visible)}</h3>
           <div className="flex gap-2">
@@ -54,7 +54,7 @@ export function DateTimePicker({
               aria-label="Previous month"
               disabled={!canPrev}
               onClick={() => setVisible((current) => new Date(current.getFullYear(), current.getMonth() - 1, 1))}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-line disabled:opacity-30"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-line bg-paper transition hover:border-taupe disabled:opacity-30"
             >
               <Chevron direction="left" />
             </button>
@@ -63,7 +63,7 @@ export function DateTimePicker({
               aria-label="Next month"
               disabled={visible >= maxMonth}
               onClick={() => setVisible((current) => new Date(current.getFullYear(), current.getMonth() + 1, 1))}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-line disabled:opacity-30"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-line bg-paper transition hover:border-taupe disabled:opacity-30"
             >
               <Chevron direction="right" />
             </button>
@@ -92,8 +92,8 @@ export function DateTimePicker({
                 disabled={disabled}
                 onClick={() => onDate(iso)}
                 className={cn(
-                  "mx-auto flex h-10 w-10 items-center justify-center rounded-full text-sm transition",
-                  selected && "bg-ink text-paper",
+                  "mx-auto flex h-10 w-10 items-center justify-center rounded-full text-sm transition duration-300",
+                  selected && "bg-ink text-paper scale-105 shadow-soft",
                   !selected && !disabled && "hover:bg-sand",
                   !selected && isToday && "ring-1 ring-inset ring-taupe",
                   disabled && "cursor-not-allowed text-muted/50",
@@ -121,9 +121,9 @@ export function DateTimePicker({
                   disabled={disabled}
                   onClick={() => onTime(slot.time)}
                   className={cn(
-                    "rounded-2xl border px-3 py-3 text-sm transition",
-                    selected && "border-ink bg-ink text-paper",
-                    !selected && slot.state === "open" && "border-line bg-paper hover:border-taupe",
+                    "rounded-2xl border px-3 py-3 text-sm transition duration-300",
+                    selected && "border-ink bg-ink text-paper scale-[1.03] shadow-soft",
+                    !selected && slot.state === "open" && "border-line bg-paper hover:border-taupe hover:bg-sand/40",
                     disabled && "cursor-not-allowed border-line/70 bg-ivory text-muted",
                   )}
                 >

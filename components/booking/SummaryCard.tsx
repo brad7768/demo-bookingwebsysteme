@@ -1,8 +1,12 @@
+"use client";
+
+import { motion, useReducedMotion } from "framer-motion";
 import { professionalById, serviceById } from "@/lib/data";
 import type { BookingDraft, Service } from "@/lib/types";
 import { formatDuration, formatLongDate, formatPrice } from "@/lib/utils";
 
 export function SummaryCard({ draft, catalog }: { draft: BookingDraft; catalog: Service[] }) {
+  const reduce = useReducedMotion();
   const service = serviceById(draft.serviceId, catalog);
   const professional = professionalById(draft.professionalId);
 
@@ -14,11 +18,15 @@ export function SummaryCard({ draft, catalog }: { draft: BookingDraft; catalog: 
   ];
 
   return (
-    <aside className="rounded-3xl border border-line bg-paper p-5 shadow-soft lg:sticky lg:top-24">
+    <motion.aside
+      className="glass-panel rounded-3xl p-5 lg:sticky lg:top-24"
+      layout={!reduce}
+      transition={{ type: "spring", stiffness: 320, damping: 30 }}
+    >
       <p className="text-[11px] uppercase tracking-[0.18em] text-muted">Your appointment</p>
       <dl className="mt-4 space-y-4">
         {rows.map((row) => (
-          <div key={row.label} className="flex items-start justify-between gap-4">
+          <div key={row.label} className="flex items-start justify-between gap-4 border-b border-line/60 pb-3 last:border-0 last:pb-0">
             <dt className="text-xs text-muted">{row.label}</dt>
             <dd className="text-right">
               <p className="text-sm text-ink">{row.value}</p>
@@ -33,6 +41,6 @@ export function SummaryCard({ draft, catalog }: { draft: BookingDraft; catalog: 
           <p className="font-serif text-3xl leading-none">{service ? formatPrice(service.price) : "—"}</p>
         </div>
       </div>
-    </aside>
+    </motion.aside>
   );
 }

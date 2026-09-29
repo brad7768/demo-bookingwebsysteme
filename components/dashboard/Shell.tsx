@@ -21,7 +21,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
   const open = menuPath === pathname;
 
   return (
-    <div className="min-h-screen bg-[#f3efe9]">
+    <div className="min-h-screen bg-[#f3efe9] texture-grain">
       {open ? (
         <button type="button" className="fixed inset-0 z-40 bg-ink/30 md:hidden" aria-label="Close menu" onClick={() => setMenuPath(null)} />
       ) : null}
