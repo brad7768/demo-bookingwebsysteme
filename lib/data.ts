@@ -65,6 +65,7 @@ export const professionals: Professional[] = [
     bio: "Fifteen years of cutting hair to the face in front of her, with a calm, exacting hand.",
     focus: "Cuts, shape, and finish",
     initials: "EL",
+    yearsExperience: 15,
   },
   {
     id: "sofia",
@@ -73,6 +74,7 @@ export const professionals: Professional[] = [
     bio: "Paints color that looks like it arrived with the light — soft grow-out, precise tone.",
     focus: "Balayage and gloss",
     initials: "SM",
+    yearsExperience: 12,
   },
   {
     id: "mia",
@@ -81,6 +83,7 @@ export const professionals: Professional[] = [
     bio: "The finish, the texture, and the unhurried last minutes of an appointment.",
     focus: "Blowouts and consultations",
     initials: "MC",
+    yearsExperience: 10,
   },
 ];
 

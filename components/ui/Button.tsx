@@ -6,7 +6,7 @@ type Size = "md" | "sm";
 
 export function buttonClass(variant: Variant = "primary", size: Size = "md", className?: string) {
   return cn(
-    "inline-flex items-center justify-center gap-2 rounded-full font-medium transition duration-200",
+    "inline-flex items-center justify-center gap-2 rounded-full font-medium transition duration-300 ease-out hover:scale-[1.02] active:scale-[0.99]",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2 focus-visible:ring-offset-ivory",
     "disabled:cursor-not-allowed disabled:opacity-40",
     size === "md" ? "h-11 px-5 text-sm" : "h-9 px-3.5 text-[13px]",

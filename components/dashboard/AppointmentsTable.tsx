@@ -34,8 +34,19 @@ export function AppointmentsTable({
               <td className="px-6 py-4">{row.professionalName}</td>
               <td className="px-6 py-4">{row.serviceName}</td>
               <td className="px-6 py-4">
-                {row.customerName}
-                {row.source === "demo" ? <span className="ml-2 text-[10px] uppercase tracking-[0.14em] text-muted">Demo</span> : null}
+                <div className="flex items-center gap-3">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-champagne text-[11px] font-medium text-brown">
+                    {row.customerName
+                      .split(" ")
+                      .map((p) => p[0])
+                      .slice(0, 2)
+                      .join("")}
+                  </span>
+                  <span>
+                    {row.customerName}
+                    {row.source === "demo" ? <span className="ml-2 text-[10px] uppercase tracking-[0.14em] text-muted">Demo</span> : null}
+                  </span>
+                </div>
               </td>
               <td className="px-6 py-4">
                 <StatusPill status={row.status} />

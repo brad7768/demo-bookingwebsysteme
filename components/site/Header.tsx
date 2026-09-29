@@ -7,9 +7,12 @@ import { cn } from "@/lib/utils";
 
 const links = [
   { id: "services", label: "Services" },
-  { id: "about", label: "About" },
-  { id: "contact", label: "Contact" },
+  { id: "studio", label: "Studio" },
+  { id: "professionals", label: "Team" },
+  { id: "contact", label: "Visit" },
 ] as const;
+
+export type SiteSection = (typeof links)[number]["id"];
 
 export function Header({
   mode,
@@ -17,19 +20,19 @@ export function Header({
   onBook,
 }: {
   mode: "site" | "book";
-  onNavigate: (section?: (typeof links)[number]["id"]) => void;
+  onNavigate: (section?: SiteSection) => void;
   onBook: () => void;
 }) {
   const [open, setOpen] = useState(false);
 
-  function navigate(section?: (typeof links)[number]["id"]) {
+  function navigate(section?: SiteSection) {
     setOpen(false);
     onNavigate(section);
   }
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line/80 bg-ivory/85 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-5 md:h-[4.5rem] md:px-8">
+    <header className="sticky top-0 z-40 border-b border-line/60 bg-ivory/75 backdrop-blur-xl">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-5 md:h-[4.5rem] md:px-8">
         <button type="button" onClick={() => navigate()} className="flex items-baseline gap-2 text-left">
           <span className="font-serif text-[1.35rem] tracking-[0.16em] text-ink">LUMIÈRE</span>
           <span className="hidden text-[10px] tracking-[0.24em] text-muted sm:inline">STUDIO</span>
@@ -41,15 +44,16 @@ export function Header({
               key={link.id}
               type="button"
               onClick={() => navigate(link.id)}
-              className="text-sm text-ink-soft transition hover:text-ink"
+              className="group relative text-sm text-ink-soft transition hover:text-ink"
             >
               {link.label}
+              <span className="absolute -bottom-1 left-0 h-px w-0 bg-ink transition-all duration-300 group-hover:w-full" />
             </button>
           ))}
         </nav>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          <span className="rounded-full border border-line bg-paper px-2 py-0.5 text-[10px] uppercase tracking-[0.16em] text-muted">
+          <span className="rounded-full border border-line bg-paper/80 px-2 py-0.5 text-[10px] uppercase tracking-[0.16em] text-muted backdrop-blur">
             Demo
           </span>
           <Link href="/dashboard" className="hidden text-sm text-muted transition hover:text-ink lg:inline">
@@ -66,7 +70,6 @@ export function Header({
             aria-label={open ? "Close menu" : "Open menu"}
             onClick={() => setOpen((value) => !value)}
           >
-            <span className="sr-only">Menu</span>
             <span className="flex flex-col gap-1">
               <span className={cn("block h-px w-3.5 bg-ink transition", open && "translate-y-[2.5px] rotate-45")} />
               <span className={cn("block h-px w-3.5 bg-ink transition", open && "-translate-y-[2.5px] -rotate-45")} />
@@ -75,7 +78,7 @@ export function Header({
         </div>
       </div>
       {open ? (
-        <div className="border-t border-line bg-ivory px-5 py-4 md:hidden">
+        <div className="border-t border-line bg-ivory/95 px-5 py-4 backdrop-blur md:hidden">
           <div className="flex flex-col gap-1">
             {links.map((link) => (
               <button
