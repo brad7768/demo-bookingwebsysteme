@@ -27,3 +27,5 @@ Local dev does not need the variable; the app uses `http://localhost:3000` when 
 | **Admin CTA** | `https://lumiere-studio-demo.netlify.app/dashboard` |
 
 The animated site is a **sister** experience: book and manage appointments on the Next/Netlify app.
+
+Scroll film and hero GLB: procedural assets in-repo until Higgsfield credits are available — see [HIGGSFIELD_ASSETS.md](./HIGGSFIELD_ASSETS.md).

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 const POSTER = "/studio/hero-poster.svg";
-/** Optional: add `public/studio/atelier-form.glb` from Higgsfield image→3D when credits are available. */
+/** `public/studio/atelier-form.glb` — replace via Higgsfield image→3D when credits are available (see docs/HIGGSFIELD_ASSETS.md). */
 const MODEL = "/studio/atelier-form.glb";
 
 export function HeroVisual() {
