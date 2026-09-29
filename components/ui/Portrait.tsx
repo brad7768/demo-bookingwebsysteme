@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { professionalImage } from "@/lib/editorial-images";
+import { staffImage } from "@/lib/studio-images";
 import { cn } from "@/lib/utils";
 
 const tones: Record<string, string> = {
@@ -28,7 +28,7 @@ export function Portrait({
       .map((part) => part[0])
       .slice(0, 2)
       .join("");
-  const photo = src ?? professionalImage(id);
+  const photo = src ?? staffImage(id);
 
   return (
     <div

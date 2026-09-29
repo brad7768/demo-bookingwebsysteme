@@ -9,7 +9,7 @@ import { Portrait } from "@/components/ui/Portrait";
 import { DateTimePicker } from "@/components/booking/DateTimePicker";
 import { Progress } from "@/components/booking/Progress";
 import { SummaryCard } from "@/components/booking/SummaryCard";
-import { serviceImage } from "@/lib/editorial-images";
+import { serviceImage, studioImages } from "@/lib/studio-images";
 import { professionalById, professionals, serviceById } from "@/lib/data";
 import { saveGuestBooking } from "@/lib/guest-bookings";
 import { downloadAppointmentIcs } from "@/lib/ics";
@@ -271,9 +271,16 @@ export function BookingFlow({ launch, onExit }: { launch: Launch | null; onExit:
             ) : null}
 
             {step === 5 && service && professional && draft.date && draft.time ? (
-              <section className="mx-auto max-w-lg text-center" aria-live="polite">
+              <section className="relative mx-auto max-w-lg min-h-[32rem] overflow-hidden rounded-[2rem] text-center" aria-live="polite">
+                <div className="pointer-events-none absolute inset-0 opacity-[0.07]">
+                  <div className="relative h-full min-h-[32rem]">
+                    <Image src={studioImages.details.texture} alt="" fill className="object-cover" />
+                  </div>
+                </div>
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(185,165,140,0.35),transparent_55%)]" />
+                <div className="relative px-4 py-10">
                 <motion.div
-                  className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-ink text-paper shadow-elevated"
+                  className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-ink text-paper shadow-float ring-4 ring-champagne/40"
                   initial={reduce ? false : { scale: 0.6, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ type: "spring", stiffness: 260, damping: 18 }}
@@ -306,8 +313,9 @@ export function BookingFlow({ launch, onExit }: { launch: Launch | null; onExit:
                   </dl>
                 </motion.div>
                 <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-                  <Button onClick={addToCalendar}>Add to calendar</Button>
-                  <Button variant="secondary" onClick={bookAnother}>Book another appointment</Button>
+                  <Button onClick={addToCalendar} className="btn-editorial">Add to calendar</Button>
+                  <Button variant="secondary" onClick={bookAnother} className="btn-editorial">Book another appointment</Button>
+                </div>
                 </div>
               </section>
             ) : null}

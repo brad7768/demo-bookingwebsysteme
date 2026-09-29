@@ -18,6 +18,7 @@ export type Professional = {
   bio: string;
   focus: string;
   initials: string;
+  yearsExperience?: number;
 };
 
 export type Customer = {

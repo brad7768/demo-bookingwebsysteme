@@ -1,8 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { studioImages } from "@/lib/studio-images";
 import { cn } from "@/lib/utils";
 
 const items = [
@@ -12,6 +14,7 @@ const items = [
   { href: "/dashboard/services", label: "Services", icon: "spark" },
   { href: "/dashboard/staff", label: "Staff", icon: "people" },
   { href: "/dashboard/customers", label: "Customers", icon: "user" },
+  { href: "/dashboard/marketing", label: "Marketing", icon: "megaphone" },
   { href: "/dashboard/settings", label: "Settings", icon: "gear" },
 ] as const;
 
@@ -21,7 +24,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
   const open = menuPath === pathname;
 
   return (
-    <div className="min-h-screen bg-[#f3efe9] texture-grain">
+    <div className="min-h-screen bg-gradient-to-br from-ivory via-champagne/40 to-ivory texture-grain">
       {open ? (
         <button type="button" className="fixed inset-0 z-40 bg-ink/30 md:hidden" aria-label="Close menu" onClick={() => setMenuPath(null)} />
       ) : null}
@@ -58,7 +61,16 @@ export function Shell({ children }: { children: React.ReactNode }) {
             );
           })}
         </nav>
-        <div className="border-t border-line p-4">
+        <div className="border-t border-line p-4 space-y-3">
+          <div className="flex items-center gap-3 rounded-2xl bg-champagne/50 p-3">
+            <div className="relative h-10 w-10 overflow-hidden rounded-full border border-line">
+              <Image src={studioImages.studio.interior} alt="" fill sizes="40px" className="object-cover" />
+            </div>
+            <div className="min-w-0">
+              <p className="truncate text-xs font-medium">Lumière Studio</p>
+              <p className="text-[10px] uppercase tracking-[0.14em] text-muted">New York</p>
+            </div>
+          </div>
           <Link href="/" className="block rounded-2xl px-3 py-2 text-sm text-ink-soft transition hover:bg-sand/70 hover:text-ink">
             View booking page
           </Link>
@@ -94,6 +106,7 @@ function Icon({ name }: { name: string }) {
     user: "M10 10a2.6 2.6 0 1 0 0-5.2A2.6 2.6 0 0 0 10 10zM5 16c.6-2.4 2.4-3.6 5-3.6s4.4 1.2 5 3.6",
     gear: "M10 12.2a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4zM10 3.5v1.6M10 14.9v1.6M4.2 6.2l1.4.8M14.4 13l1.4.8M4.2 13.8l1.4-.8M14.4 7l1.4-.8",
     menu: "M4 6.5h12M4 10h12M4 13.5h12",
+    megaphone: "M4 8.5 7 6.5v7L4 11.5M9 10h4l3 2v-6l-3 2H9",
   };
   return (
     <svg viewBox="0 0 20 20" className="h-4 w-4" aria-hidden>

@@ -9,6 +9,7 @@ import { ExploreCursor } from "@/components/site/ExploreCursor";
 import { HowItWorksSection } from "@/components/site/HowItWorksSection";
 import { ProfessionalsSection } from "@/components/site/ProfessionalsSection";
 import { ServiceVisualCard } from "@/components/site/ServiceVisualCard";
+import { FeaturedBalayage } from "@/components/site/FeaturedBalayage";
 import { StudioEditorialSection } from "@/components/site/StudioEditorialSection";
 import { Reveal } from "@/components/motion/Reveal";
 import { Button } from "@/components/ui/Button";
@@ -63,7 +64,8 @@ export function StudioHome() {
             </div>
           </section>
 
-          <StudioEditorialSection />
+          <FeaturedBalayage onBook={() => openBooking("balayage")} />
+          <StudioEditorialSection onExplore={() => navigate("studio")} />
           <ProfessionalsSection onBook={(id) => openBooking(undefined, id)} />
           <HowItWorksSection onBook={() => openBooking()} />
 
