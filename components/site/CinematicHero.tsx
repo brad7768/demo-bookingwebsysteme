@@ -24,7 +24,13 @@ export function CinematicHero({
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 1.1, ease }}
       >
-        <EditorialImage src={editorialImages.hero} alt="" fill priority sizes="100vw" className="object-cover" />
+        <motion.div
+          className="absolute inset-0"
+          animate={reduce ? undefined : { scale: [1, 1.05] }}
+          transition={{ duration: 20, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+        >
+          <EditorialImage src={editorialImages.hero} alt="" fill priority sizes="100vw" className="object-cover" />
+        </motion.div>
         <motion.div
           className="absolute inset-0 bg-gradient-to-r from-ink/75 via-ink/45 to-ink/15"
           initial={reduce ? false : { opacity: 0 }}
